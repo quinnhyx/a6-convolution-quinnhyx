@@ -4,7 +4,7 @@
 
 #define BLOCKSIZE 16
 #define Mask_Width 5
-#define WIDTH 100000000
+#define WIDTH 10000000
 
 double get_clock() {
  struct timeval tv; int ok;
@@ -40,8 +40,8 @@ int main(){
     
     double t0=get_clock();
     convolution_1D_basic_kernel<<<(WIDTH + BLOCKSIZE-1)/BLOCKSIZE, BLOCKSIZE>>>(N, M, P, Mask_Width, WIDTH);
-    double t1 = get_clock();
     cudaDeviceSynchronize();
+    double t1 = get_clock();
 
     printf("time per call: %f ns\n", (1000000000.0*(t1-t0)));
 
