@@ -1,0 +1,26 @@
+---
+title: "histogram"
+format: html
+editor: visual
+---
+
+```{r, include = FALSE}
+library(tidyverse)
+library(tidyr)
+
+convolution<- read.csv("convolution.csv")
+```
+
+```{r}
+convolution$size <- as.factor(convolution$size)
+
+ggplot(convolution, aes(x = size,
+                  y = log(time.ns),
+                  color = algo))+
+  geom_point()+
+  geom_line(linewidth = 1, aes(group = algo))+
+  labs(title = "Time difference between 2 different algorithm",
+       x = "array size",
+       y = "log(Time/ns)")+
+  scale_x_discrete(labels = c("10", "100", "1000","10000","100000","1000000","10000000"))
+```
